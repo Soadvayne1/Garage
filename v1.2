@@ -1,9 +1,10 @@
+# Greet the user with a one time message when program is launched
 greeting = ('Welcome to the Virtual Garage!\n'
             'You will be able to add vehicles to your garage and then view them along with their respective attributes and options.\n'
             'One car and one pickup are required to view your garage. Please follow the prompts and fill up your garage!')
 print(greeting)
 
-
+# Create the parent class
 class Vehicle:
     
     def __init__(self, make, model, color, fuelType, options):
@@ -28,7 +29,7 @@ class Vehicle:
     def GetOptions(self):        
         return self.options
         
-   
+  # create the first child class 
 class Car (Vehicle):
     def __init__(self, make, model, color, fuelType, options, engineSize, numDoors):
         super().__init__(make, model, color, fuelType, options)
@@ -52,7 +53,7 @@ class Car (Vehicle):
         print('Number of Doors: ', self.numDoors)
         print()
 
-
+#create the second child class
 class Pickup (Vehicle):
     def __init__(self, make, model, color, fuelType, options, cabStyle, bedLength):
         super().__init__(make, model, color, fuelType, options)
@@ -65,6 +66,7 @@ class Pickup (Vehicle):
     def GetBedLength(self):       
         return self.bedLength
 
+# print function to print the garage results out. Tried using __str__ and __repr__ but kept running into an issue where it would print the object location
     def Printer(self):
         print('Vehicle Type: Pickup')
         print('Make: ',self.make)
@@ -76,13 +78,15 @@ class Pickup (Vehicle):
         print('Bed Length: ', self.bedLength)
         print()
 
-
+# Function to handle the bulk of the program
 def Main():
 
-    garage = []
+# Empty list to hold vehicles when created by user
+    garage = [] 
 
+# Main menu to guide the user through the options
     while True:
-        choice = input('\n--------Virtual Garage Menu--------\n\n'
+        choice = input('\n--------Virtual Garage Menu--------\n\n' 
                        'Enter *c* to add a Car to your Garage.\n'
                        'Enter *p* to add a Pickup Truck to your Garage.\n'
                        'Enter *g* to view your Garage.\n'
@@ -91,6 +95,7 @@ def Main():
                        '\nWhat would you like to do?: '
                        ).lower()
 
+# When adding a car to the garage run through these options
         if choice == 'c':
            print('\n-----------------------------------')
            print('You have chosen to enter a Car.')
@@ -143,6 +148,7 @@ def Main():
            print('Vehicle added')
            print('-----------------------------------\n')   
 
+# When adding a Pickup Truck to the garage
         if choice == 'p':
            print('\n-----------------------------------')
            print('You have chosen to enter a Pickup Truck.')
@@ -195,8 +201,9 @@ def Main():
            print('\n-----------------------------------')
            print('Vehicle added')
            print('-----------------------------------\n')
-          
-        if choice == 'g':
+
+# When user wants to view their garage          
+        if choice == 'g': # Placeholder until I can figure out how to differentiate the Cars from the Trucks.
             i = 0
             for v in garage:
                 i = i+1
@@ -209,6 +216,7 @@ def Main():
                 for v in garage:
                     v.Printer()
 
+# Allows user to add more vehicles in the garage or term the program
                 print('\n-----------------------------------')
                 cont = input('\nWould you like to add more cars to your Garage or quit. Enter *y* to continue adding vehicles. Enter *n* to quit: ')
                 print('\n-----------------------------------')
@@ -218,15 +226,18 @@ def Main():
                 if cont == 'n':
                     break
 
+# If requirements are not met, alert the user and force them to continue the loop until req's are met. 
             if i < 2:
                 print('\n-----------------------------------')
                 print('You do not have the required amount of vehicles in your Garage to continue. Please add a Car or Pickup Truck.')
                 print('-----------------------------------\n')
                 continue
 
+# Term the program
         if choice == 'q':
             break
 
+# Menu entry validation 
         if choice != 'c' or choice != 'p' or choice != 'g' or choice != 'q':
             print('\n-----------------------------------')
             print('That is not a valid option, please try again')
