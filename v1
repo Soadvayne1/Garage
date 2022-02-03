@@ -1,0 +1,168 @@
+
+greeting = ('Welcome to the Virtual Garage!\n'
+            'You will be able to add vehicles to your garage and then view them along with their respective attributes and options.\n'
+            'One car and one pickup are required to view your garage. Please follow the prompts and fill up your garage!')
+print(greeting)
+
+
+class Vehicle:
+    
+    def __init__(self, make, model, color, fuelType, options):
+        self.make = make
+        self.model = model
+        self.color = color
+        self.fuelType = fuelType
+        self.options = options
+
+    def GetMake(self):
+        self.make = input('Enter the Make of your Vehicle: ')
+        return self.make
+      
+
+    def GetModel(self):
+        self.model = input('Enter the Model of your Vehicle: ')
+        return self.model
+       
+
+    def GetColor(self):
+       self.color = input('Enter the Color of your Vehicle: ')
+       return self.color
+
+    def GetFuelType(self):
+        self.fuelType = input('Enter the fuel type of your Vehicle: ')
+        return self.fuelType
+        
+
+    def GetOptions(self):
+        oList = []
+        print('Please enter *y* or *n* for the following options')
+        pMirrors = input('Does your vehicle have Power Mirrors?: ').lower()
+        pLocks = input('Does your vehicle have Power Locks?: ').lower()
+        remStart = input('Does your vehicle have Remote Start?:').lower()
+        backCam = input('Does your vehicle have a Backup Camera?: ').lower()
+        bTooth = input('Does your vehicle have Bluetooth?: ').lower()
+        cruiseCtrl = input('Does your vehicle have Cruise Control?: ').lower()
+        heatSeat = input('Does your vehicle have Heated Seats?: ').lower()
+        heatWheel = input('Does your vehicle have a Heated Steering Wheel?: ').lower()
+
+        if pMirrors == 'y':
+            oList.append('Power Mirrors')
+        if pLocks == 'y':
+            oList.append('Power Locks')
+        if remStart == 'y':
+            oList.append('Remote Start')
+        if backCam == 'y':
+            oList.append('Backup Camera')
+        if bTooth == 'y':
+            oList.append('Bluetooth')
+        if cruiseCtrl == 'y':
+            oList.append('Cruise Control')
+        if heatSeat == 'y':
+            oList.append('Heated Seats')
+        if heatWheel == 'y':
+            oList.append('Heated Steering Wheel')
+
+        self.options = oList
+        return self.options
+        
+   
+ 
+class Car (Vehicle):
+    def __init__(self, make, model, color, fuelType, options, engineSize, numDoors):
+        super().__init__(make, model, color, fuelType, options)
+        self.engineSize = engineSize
+        self.numDoors = numDoors
+
+    def GetEngineSize(self):
+        self.engineSize = input('Please enter the size of your engine. (Example. 1.5.): ')
+        return self.engineSize
+     
+
+    def GetNumDoors(self):
+        self.numDoors = input('Please enter the number of doors on your car: ')
+        return self.numDoors
+
+
+        
+
+
+
+class Pickup (Vehicle):
+    def __init__(self, make, model, color, fuelType, options, cabStyle, bedLength):
+        super().__init__(make, model, color, fuelType, options)
+        self.cabStyle = cabStyle
+        self.bedLength = bedLength
+
+
+    def GetCabStyle(self):
+        self.cabStyle = input('Please enter the cab style of your truck: ')
+        return self.cabStyle
+
+    def GetBedLength(self):
+        self.bedLength = input('Please enter the length of your truck bed: ')
+        return self.bedLength
+
+
+
+
+
+def Main():
+
+    garage = []
+
+    while True:
+        choice = input('\nVirtual Garage Menu\n'
+                       'Enter *c* to add a Car to your Garage.\n'
+                       'Enter *p* to add a Pickup Truck to your Garage.\n'
+                       'Enter *g* to view your Garage.\n'
+                       'Enter *q* to quit the program.\n'
+                       'What would you like to do?: '
+                       ).lower()
+
+        if choice == 'c':
+           print('\nYou have chosen to enter a car.\n')
+           carG = Car('','','','','','','')
+           Car.GetMake(carG)
+           Car.GetModel(carG)
+           Car.GetColor(carG)
+           Car.GetFuelType(carG)
+           Car.GetOptions(carG)
+           Car.GetEngineSize(carG)
+           Car.GetNumDoors(carG)
+           
+           garage.append(carG)
+           Main()
+           
+
+        if choice == 'p':
+           print('\nYou have chosen to enter a pickup.\n')
+           pickG = Pickup('','','','','','','')
+           Pickup.GetMake(pickG)
+           Pickup.GetModel(pickG)
+           Pickup.GetColor(pickG)
+           Pickup.GetFuelType(pickG)
+           Pickup.GetOptions(pickG)
+           Pickup.GetCabStyle(pickG)
+           Pickup.GetBedLength(pickG)
+           
+           garage.append(pickG)
+           Main()
+
+        if choice == 'g':
+            print(str(garage))
+
+
+        if choice != 'c' or choice != 'p' or choice != 'g' or choice != 'q':
+            print('That is not a valid option, please try again')
+            Main()
+         
+        if choice == 'q':
+            break
+
+
+
+        
+
+
+
+Main()
