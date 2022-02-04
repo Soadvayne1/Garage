@@ -1,0 +1,256 @@
+# Greet the user with a one time message when program is launched
+greeting = ('Welcome to the Virtual Garage!\n'
+            'You will be able to add vehicles to your garage and then view them along with their respective attributes and options.\n'
+            'One car and one pickup are required to view your garage. Please follow the prompts and fill up your garage!')
+print(greeting)
+
+# Create the parent class
+class Vehicle:
+    
+    def __init__(self, make, model, color, fuelType, options):
+        self.make = make
+        self.model = model
+        self.color = color
+        self.fuelType = fuelType
+        self.options = options
+
+    def GetMake(self):       
+        return self.make
+    
+    def GetModel(self):   
+        return self.model
+       
+    def GetColor(self):      
+       return self.color
+
+    def GetFuelType(self):        
+        return self.fuelType
+        
+    def GetOptions(self):        
+        return self.options
+        
+  # create the first child class 
+class Car (Vehicle):
+    def __init__(self, make, model, color, fuelType, options, engineSize, numDoors):
+        super().__init__(make, model, color, fuelType, options)
+        self.engineSize = engineSize
+        self.numDoors = numDoors
+
+    def GetEngineSize(self):     
+        return self.engineSize    
+
+    def GetNumDoors(self):        
+        return self.numDoors
+
+    def Printer(self):
+        print('Vehicle Type: Car')
+        print('Make: ',self.make)
+        print('Model: ', self.model)
+        print('Color: ', self.color)
+        print('Fuel Type: ', self.fuelType)
+        print('Options: ', self.options)
+        print('Engine Size: ', self.engineSize)
+        print('Number of Doors: ', self.numDoors)
+        print()
+
+#create the second child class
+class Pickup (Vehicle):
+    def __init__(self, make, model, color, fuelType, options, cabStyle, bedLength):
+        super().__init__(make, model, color, fuelType, options)
+        self.cabStyle = cabStyle
+        self.bedLength = bedLength
+
+    def GetCabStyle(self):      
+        return self.cabStyle
+
+    def GetBedLength(self):       
+        return self.bedLength
+
+# print function to print the garage results out. Tried using __str__ and __repr__ but kept running into an issue where it would print the object location
+    def Printer(self):
+        print('Vehicle Type: Pickup')
+        print('Make: ',self.make)
+        print('Model: ', self.model)
+        print('Color: ', self.color)
+        print('Fuel Type: ', self.fuelType)
+        print('Options: ', self.options)
+        print('Cab Style: ', self.cabStyle)
+        print('Bed Length: ', self.bedLength)
+        print()
+
+# Function to handle the bulk of the program
+def Main():
+
+# Empty list to hold vehicles when created by user
+    garage = [] 
+    pickGL = []
+    carGL = []
+
+# Main menu to guide the user through the options
+    while True:
+        choice = input('\n--------Virtual Garage Menu--------\n\n' 
+                       'Enter *c* to add a Car to your Garage.\n'
+                       'Enter *p* to add a Pickup Truck to your Garage.\n'
+                       'Enter *g* to view your Garage.\n'
+                       'Enter *q* to quit the program.\n'
+                       '\n-----------------------------------\n'
+                       '\nWhat would you like to do?: '
+                       ).lower()
+
+# When adding a car to the garage run through these options
+        if choice == 'c':
+           print('\n-----------------------------------')
+           print('You have chosen to enter a Car.')
+           print('-----------------------------------')
+
+           make = input('Enter the Make of your Vehicle: ')
+           model = input('Enter the Model of your Vehicle: ')
+           color = input('Enter the Color of your Vehicle: ')
+           fuelType = input('Enter the fuel type of your Vehicle: ')
+
+           oList = []
+           print('\n-----------------------------------')
+           print('Please enter *y* or *n* for the following options')
+           print('-----------------------------------\n')
+           pMirrors = input('Does your vehicle have Power Mirrors?: ').lower()
+           pLocks = input('Does your vehicle have Power Locks?: ').lower()
+           remStart = input('Does your vehicle have Remote Start?:').lower()
+           backCam = input('Does your vehicle have a Backup Camera?: ').lower()
+           bTooth = input('Does your vehicle have Bluetooth?: ').lower()
+           cruiseCtrl = input('Does your vehicle have Cruise Control?: ').lower()
+           heatSeat = input('Does your vehicle have Heated Seats?: ').lower()
+           heatWheel = input('Does your vehicle have a Heated Steering Wheel?: ').lower()
+
+           if pMirrors == 'y':
+               oList.append('Power Mirrors')
+           if pLocks == 'y':
+               oList.append('Power Locks')
+           if remStart == 'y':
+               oList.append('Remote Start')
+           if backCam == 'y':
+               oList.append('Backup Camera')
+           if bTooth == 'y':
+               oList.append('Bluetooth')
+           if cruiseCtrl == 'y':
+               oList.append('Cruise Control')
+           if heatSeat == 'y':
+               oList.append('Heated Seats')
+           if heatWheel == 'y':
+               oList.append('Heated Steering Wheel')
+
+           options = oList
+
+           engineSize = input('Please enter the size of your engine. (Example. 1.5.): ')
+           numDoors = input('Please enter the number of doors on your car: ')
+           
+           carG = Car(make, model, color, fuelType, options, engineSize, numDoors)
+           carGL.append(carG)
+
+           print('\n-----------------------------------')
+           print('Vehicle added')
+           print('-----------------------------------\n')   
+
+# When adding a Pickup Truck to the garage
+        if choice == 'p':
+           print('\n-----------------------------------')
+           print('You have chosen to enter a Pickup Truck.')
+           print('-----------------------------------\n')
+           
+
+           make = input('Enter the Make of your Vehicle: ')
+           model = input('Enter the Model of your Vehicle: ')
+           color = input('Enter the Color of your Vehicle: ')
+           fuelType = input('Enter the fuel type of your Vehicle: ')
+
+           oList = []
+           print('\n-----------------------------------')
+           print('Please enter *y* or *n* for the following options')
+           print('-----------------------------------\n')
+           pMirrors = input('Does your vehicle have Power Mirrors?: ').lower()
+           pLocks = input('Does your vehicle have Power Locks?: ').lower()
+           remStart = input('Does your vehicle have Remote Start?:').lower()
+           backCam = input('Does your vehicle have a Backup Camera?: ').lower()
+           bTooth = input('Does your vehicle have Bluetooth?: ').lower()
+           cruiseCtrl = input('Does your vehicle have Cruise Control?: ').lower()
+           heatSeat = input('Does your vehicle have Heated Seats?: ').lower()
+           heatWheel = input('Does your vehicle have a Heated Steering Wheel?: ').lower()
+
+           if pMirrors == 'y':
+               oList.append('Power Mirrors')
+           if pLocks == 'y':
+               oList.append('Power Locks')
+           if remStart == 'y':
+               oList.append('Remote Start')
+           if backCam == 'y':
+               oList.append('Backup Camera')
+           if bTooth == 'y':
+               oList.append('Bluetooth')
+           if cruiseCtrl == 'y':
+               oList.append('Cruise Control')
+           if heatSeat == 'y':
+               oList.append('Heated Seats')
+           if heatWheel == 'y':
+               oList.append('Heated Steering Wheel')
+
+           options = oList
+           
+           cabStyle = input('Please enter the cab style of your truck: ')
+           bedLength = input('Please enter the length of your truck bed: ')
+
+           pickG = Pickup(make, model, color, fuelType, options, cabStyle, bedLength)
+           pickGL.append(pickG)
+
+           print('\n-----------------------------------')
+           print('Vehicle added')
+           print('-----------------------------------\n')
+
+# When user wants to view their garage          
+        if choice == 'g': # Placeholder until I can figure out how to differentiate the Cars from the Trucks.
+            i = 0
+            for v in pickGL:
+                i = i+1
+            x = 0
+            for v in carGL:
+                x = x+1
+
+
+            if i >= 1 and x >= 1:
+                print('\n-----------------------------------\n')
+                print('Your garage contains the following Vehicles:')
+                print('\n-----------------------------------\n')
+                garage.append(carG) if carG not in garage else None
+                garage.append(pickG) if pickG not in garage else None
+                for v in garage:
+                    v.Printer()
+
+# Allows user to add more vehicles in the garage or term the program
+                print('\n-----------------------------------')
+                cont = input('\nWould you like to add more cars to your Garage or quit. Enter *y* to continue adding vehicles. Enter *n* to quit: ')
+                print('\n-----------------------------------')
+
+                if cont == 'y':
+                    continue
+                if cont == 'n':
+                    break
+
+# If requirements are not met, alert the user and force them to continue the loop until req's are met. 
+            if not carGL or not pickGL:
+                print('\n-----------------------------------')
+                print('You do not have the required amount of vehicles in your Garage to continue. Please add a Car or Pickup Truck.')
+                print('-----------------------------------\n')
+                continue
+
+# Term the program
+        if choice == 'q':
+            break
+
+# Menu entry validation. but it seems to sometimes trigger when it shouldnt when the menu reloads
+'''
+        if choice != 'c' or choice != 'p' or choice != 'g' or choice != 'q':
+            print('\n-----------------------------------')
+            print('That is not a valid option, please try again')
+            print('-----------------------------------')
+            continue 
+'''
+         
+Main()
